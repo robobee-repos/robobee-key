@@ -1,4 +1,7 @@
 #!/bin/bash
+set -x
+
+docker start bind registry apt-cacher-ng
 
 export DATE=$(date); export IP_ADDRESS=$(hostname -I|cut -d' ' -f1); ssh -i robobee_id_rsa robobee@robobee-test sudo bash -s <<EOF
 date; echo $DATE; date --set="$DATE"
