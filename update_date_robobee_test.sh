@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+SSH_HOST="$1"; shift
+
 docker start bind registry apt-cacher-ng
 
 if [ $# -eq 1 ]; then
@@ -12,7 +14,6 @@ fi
 export DATE=$(date)
 export IP_ADDRESS
 
-ssh -i robobee_id_rsa robobee@robobee-test sudo bash -s <<EOF
+ssh -i robobee_id_rsa "${SSH_HOST}" sudo bash -s <<EOF
 date; echo $DATE; date --set="$DATE"
-sed -ri 's:[0-9]+.[0-9]+.[0-9]+.[0-9]+:$IP_ADDRESS:g' /etc/apt/apt.conf.d/01proxy
 EOF
