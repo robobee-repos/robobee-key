@@ -31,6 +31,8 @@ etcd-copy:
 	cp $(CA_MAKE)/etcd_ca/private/etcd-1.robobee-test.test_key_insecure.pem robobee_test_etcd_etcd_1_server_key.pem
 	cp $(CA_MAKE)/etcd_ca/certs/etcd-2.robobee-test.test_cert.pem robobee_test_etcd_etcd_2_server_cert.pem
 	cp $(CA_MAKE)/etcd_ca/private/etcd-2.robobee-test.test_key_insecure.pem robobee_test_etcd_etcd_2_server_key.pem
+	cp $(CA_MAKE)/etcd_ca/certs/kube-0_cert.pem robobee_test_etcd_kube_0_cert.pem
+	cp $(CA_MAKE)/etcd_ca/private/kube-0_key_insecure.pem robobee_test_etcd_kube_0_key.pem
 
 PHONY: k8s
 k8s: ##@targets Creates the k8s cluster certificates.
