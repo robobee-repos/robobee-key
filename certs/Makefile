@@ -17,9 +17,9 @@ root: ##@targets Creates the root CA certificates.
 PHONY: etcd
 etcd: ##@targets Creates the etcd cluster certificates.
 	cd $(CA_MAKE)/etcd_ca && $(MAKE)
-	cd $(CA_MAKE)/etcd_ca && $(MAKE) server ETCD_SAN="IP:127.0.0.1, IP:10.0.1.10, IP:192.168.56.200, DNS:etcd-0.robobee-test.test" SERVER_NAME=etcd-0.robobee-test.test
-	cd $(CA_MAKE)/etcd_ca && $(MAKE) server ETCD_SAN="IP:127.0.0.1, IP:10.0.1.10, IP:192.168.56.201, DNS:etcd-1.robobee-test.test" SERVER_NAME=etcd-1.robobee-test.test
-	cd $(CA_MAKE)/etcd_ca && $(MAKE) server ETCD_SAN="IP:127.0.0.1, IP:10.0.1.10, IP:192.168.56.202, DNS:etcd-2.robobee-test.test" SERVER_NAME=etcd-2.robobee-test.test
+	cd $(CA_MAKE)/etcd_ca && $(MAKE) server ETCD_SAN="IP:127.0.0.1, IP:10.10.10.7, IP:192.168.56.200, DNS:etcd-0.robobee-test.test" SERVER_NAME=etcd-0.robobee-test.test
+	cd $(CA_MAKE)/etcd_ca && $(MAKE) server ETCD_SAN="IP:127.0.0.1, IP:10.10.10.7, IP:192.168.56.201, DNS:etcd-1.robobee-test.test" SERVER_NAME=etcd-1.robobee-test.test
+	cd $(CA_MAKE)/etcd_ca && $(MAKE) server ETCD_SAN="IP:127.0.0.1, IP:10.10.10.7, IP:192.168.56.202, DNS:etcd-2.robobee-test.test" SERVER_NAME=etcd-2.robobee-test.test
 	cd $(CA_MAKE)/etcd_ca && $(MAKE) client CLIENT_NAME=kube-0
 
 PHONY: etcd-copy
