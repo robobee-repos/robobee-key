@@ -9,10 +9,28 @@ function changeWorkDir() {
   cd "$DIR"
 }
 
+nodes_ssh_port="22"
+
+if [[ $# -gt 0 ]]; then
+  nodes_ssh_port="$1"; shift
+fi
+
 changeWorkDir
 
-TIME=60000
+TIME=12h
+PRIVATE_KEY="robobee_id_rsa"
 
-ssh -fi robobee_id_rsa -o ControlMaster=auto -o ControlPersist=$TIME -o ControlPath=/tmp/%r@%h:%p robobee@robobee-test sleep $TIME
-ssh -fi robobee_id_rsa -o ControlMaster=auto -o ControlPersist=$TIME -o ControlPath=/tmp/%r@%h:%p robobee@robobee-1-test sleep $TIME
-ssh -fi robobee_id_rsa -o ControlMaster=auto -o ControlPersist=$TIME -o ControlPath=/tmp/%r@%h:%p robobee@robobee-2-test sleep $TIME
+HOST=robobee-test
+PORT=22
+echo "Connect to ${HOST}:${PORT}..."
+ssh -f -i ${PRIVATE_KEY} -p ${PORT} -o ControlMaster=auto -o ControlPersist=$TIME -o ControlPath=/tmp/%r@%h:%p robobee@${HOST} sleep $TIME
+
+HOST=robobee-1-test
+PORT=$nodes_ssh_port
+echo "Connect to ${HOST}:${PORT}..."
+ssh -f -F ssh_config -i ${PRIVATE_KEY} -p ${PORT} -o ControlMaster=auto -o ControlPersist=$TIME -o ControlPath=/tmp/%r@%h:%p robobee@${HOST} sleep $TIME
+
+HOST=robobee-2-test
+PORT=$nodes_ssh_port
+echo "Connect to ${HOST}:${PORT}..."
+ssh -f -F ssh_config -i ${PRIVATE_KEY} -p ${PORT} -o ControlMaster=auto -o ControlPersist=$TIME -o ControlPath=/tmp/%r@%h:%p robobee@${HOST} sleep $TIME
