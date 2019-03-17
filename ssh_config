@@ -1,0 +1,16 @@
+Host *
+ServerAliveInterval 30
+
+Host robobee-test
+Port 22
+IdentityFile robobee_id_rsa
+
+Host robobee-1-test
+Port 22
+IdentityFile robobee_id_rsa
+ProxyCommand ssh -i robobee_id_rsa -o ServerAliveInterval=30 -o ServerAliveCountMax=10000 robobee@192.168.56.200 nc %h %p
+
+Host robobee-2-test
+Port 22
+IdentityFile robobee_id_rsa
+ProxyCommand ssh -i robobee_id_rsa -o ServerAliveInterval=30 -o ServerAliveCountMax=10000 robobee@192.168.56.200 nc %h %p
